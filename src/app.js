@@ -38,6 +38,16 @@ app.post("/subscribers", async (req, res) => {
       res.status(500).json({ error: "Cannot add the element" });
     });
 });
+app.get("/subscribers/names", async (req, res) => {
+  try {
+    const subscribers = await subscriberModel
+      .find()
+      .select("-__v -_id -subscribedDate");
+    res.status(200).json(subscribers);
+  } catch (err) {
+    res.status(500).json({ error: "Invalid name URL" });
+  }
+});
 //sending GET request
 app.get("/subscribers/:id", async (req, res) => {
   // check if the id is a valid ObjectId
