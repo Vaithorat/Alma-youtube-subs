@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 });
 
 // sending GET request to get subscribers list
-app.get("/subscribers", async (req, res) => {
+router.get("/subscribers", async (req, res) => {
   try {
     // get all the subscribers from the database and exclude the __v field
     const subscribers = await subscriberModel.find().select("-__v");
