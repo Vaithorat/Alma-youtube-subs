@@ -1,15 +1,18 @@
-const mongoose = require('mongoose');
-const uri = "mongodb+srv://vaibhav:vaibhav141997@almabetter.qolyqo7.mongodb.net/?retryWrites=true&w=majority";
+const mongoose = require('mongoose')
+const subscriberModel = require('./models/subscribers')
+const data = require('./data')
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
+// Connect to DATABASE
+const DATABASE_URL = "mongodb+srv://vaibhav:vaibhav141997@almabetter.qolyqo7.mongodb.net/?retryWrites=true&w=majority";
+mongoose.connect(DATABASE_URL,{ useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection
+db.on('error', (err) => console.log(err))
+db.once('open', () => console.log('Database created...'))
 
-db.on('error', (error) => {
-  console.error(error);
-});
-
-db.once('open', () => {
-  console.log('Connected to database');
-  // perform actions on the collection object
-  mongoose.disconnect();
-});
+const refreshAll = async () => {
+    await subscriberModel.deleteMany({})
+    // console.log(connection)
+    await subscriberModel.insertMany(data)
+    await mongoose.disconnect();
+}
+refreshAll()
