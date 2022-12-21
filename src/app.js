@@ -1,11 +1,10 @@
 const express = require("express");
 const { ObjectId } = require("mongodb");
-const app = express();
 const subscriberModel = require("./models/subscribers");
-
+const router = express.Router()
 app.use(express.json());
 
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
   res.json("Hello. This project is made by Vaibhav Thorat");
 });
 
@@ -23,7 +22,7 @@ app.get("/subscribers", async (req, res) => {
 });
 
 //Sending POST request to add new subscriber
-app.post("/subscribers", async (req, res) => {
+router.post("/subscribers", async (req, res) => {
   //body to add details about the subscriber
   const body = req.body;
   //create a new subscriber and add it to database
@@ -39,7 +38,7 @@ app.post("/subscribers", async (req, res) => {
     });
 });
 // Sending GET request at the path '/subscribers/names'
-app.get("/subscribers/names", async (req, res) => {
+router.get("/subscribers/names", async (req, res) => {
   try {
     // To retrieve a list of subscribers
     const subscribers = await subscriberModel
@@ -55,7 +54,7 @@ app.get("/subscribers/names", async (req, res) => {
 });
 
 //sending GET request to fetch data as per id
-app.get("/subscribers/:id", async (req, res) => {
+router.get("/subscribers/:id", async (req, res) => {
   // check if the id is a valid ObjectId
   if (ObjectId.isValid(req.params.id)) {
     // get the subscriber with the given id from the database
@@ -78,7 +77,7 @@ app.get("/subscribers/:id", async (req, res) => {
 });
 
 //sending DELETE request to delete via id
-app.delete("/subscribers/:id", async (req, res) => {
+router.delete("/subscribers/:id", async (req, res) => {
   // check if the id in the request params is a valid ObjectId
   if (ObjectId.isValid(req.params.id)) {
     // delete the subscriber with the given id from the database
@@ -100,7 +99,7 @@ app.delete("/subscribers/:id", async (req, res) => {
 });
 
 //To update subscriber data by fetching it via id
-app.patch("/subscribers/:id", async (req, res) => {
+router.patch("/subscribers/:id", async (req, res) => {
   // check if the id in the request params is a valid ObjectId
   if (ObjectId.isValid(req.params.id)) {
     // update the subscriber with the given id in the database with the request body and return the updated document
@@ -120,4 +119,4 @@ app.patch("/subscribers/:id", async (req, res) => {
     res.status(500).json({ error: "Invalid id" });
   }
 });
-module.exports = app;
+module.exports = router;
