@@ -3,10 +3,10 @@ const routes = require("./src/app");
 const mongoose = require("mongoose");
 const port = 3000;
 const app = express();
-app.use(routes);
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(routes);
 // Connect to DATABASE
 const DATABASE_URL =
   "mongodb+srv://vaibhav:vaibhav141997@cluster0.4wefkqc.mongodb.net/?retryWrites=true&w=majority";
