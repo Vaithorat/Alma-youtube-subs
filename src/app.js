@@ -1,7 +1,7 @@
 const express = require("express");
 const { ObjectId } = require("mongodb");
 const subscriberModel = require("./models/subscribers");
-
+const app = require("./app")
 app.use(express.json());
 
 app.get("/", (req, res) => {
