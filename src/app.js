@@ -1,9 +1,8 @@
 const express = require("express");
 const { ObjectId } = require("mongodb");
 const subscriberModel = require("./models/subscribers");
-const app = require("./app")
+const app = express();
 app.use(express.json());
-
 app.get("/", (req, res) => {
   res.json("Hello. This project is made by Vaibhav Thorat");
 });
