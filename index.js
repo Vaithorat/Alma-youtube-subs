@@ -6,9 +6,9 @@ const port = process.env.PORT || 3000
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
-const url= "mongodb+srv://vaibhav:vaibhav141997@cluster0.qvudvtq.mongodb.net/?retryWrites=true&w=majority"
+const uri= "mongodb+srv://vaibhav:vaibhav141997@almabetter.qolyqo7.mongodb.net/?retryWrites=true&w=majority"
 // Connect to DATABASE
-const DATABASE_URL = url;
+const DATABASE_URL = uri;
 const db = mongoose.connection
 mongoose.connect(DATABASE_URL,{ useNewUrlParser: true, useUnifiedTopology: true },(err)=>{
     if(err){
