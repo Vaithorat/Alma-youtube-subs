@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
   res.json("Hello. This project is made by Vaibhav Thorat");
 });
 
-// sending GET request
+// sending GET request to get subscribers list
 app.get("/subscribers", async (req, res) => {
   try {
     // get all the subscribers from the database and exclude the __v field
@@ -22,7 +22,7 @@ app.get("/subscribers", async (req, res) => {
   }
 });
 
-//Sending POST request
+//Sending POST request to add new subscriber
 app.post("/subscribers", async (req, res) => {
   //body to add details about the subscriber
   const body = req.body;
@@ -38,17 +38,23 @@ app.post("/subscribers", async (req, res) => {
       res.status(500).json({ error: "Cannot add the element" });
     });
 });
+// Sending GET request at the path '/subscribers/names'
 app.get("/subscribers/names", async (req, res) => {
   try {
+    // To retrieve a list of subscribers
     const subscribers = await subscriberModel
       .find()
       .select("-__v -_id -subscribedDate");
+
+    // If successful, send a response with a status code of 200 and the list of subscribers
     res.status(200).json(subscribers);
   } catch (err) {
+    // If error occurs, send a response with a status code of 500 and an error message
     res.status(500).json({ error: "Invalid name URL" });
   }
 });
-//sending GET request
+
+//sending GET request to fetch data as per id
 app.get("/subscribers/:id", async (req, res) => {
   // check if the id is a valid ObjectId
   if (ObjectId.isValid(req.params.id)) {
@@ -71,7 +77,7 @@ app.get("/subscribers/:id", async (req, res) => {
   }
 });
 
-//sending DELETE request
+//sending DELETE request to delete via id
 app.delete("/subscribers/:id", async (req, res) => {
   // check if the id in the request params is a valid ObjectId
   if (ObjectId.isValid(req.params.id)) {
@@ -93,6 +99,7 @@ app.delete("/subscribers/:id", async (req, res) => {
   }
 });
 
+//To update subscriber data by fetching it via id
 app.patch("/subscribers/:id", async (req, res) => {
   // check if the id in the request params is a valid ObjectId
   if (ObjectId.isValid(req.params.id)) {
