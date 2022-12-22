@@ -1,6 +1,6 @@
 const express = require("express");
 const { ObjectId } = require("mongodb");
-const subscriberModel = require("./src/models/subscribers");
+const subscriberModel = require("./models/subscribers");
 const app = express();
 
 
