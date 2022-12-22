@@ -1,23 +1,22 @@
 const express = require('express')
-const app = require('./src/app')
-const mongoose = require('mongoose')
-const port = 3000
+const routes = require('./src/app');
+const app = express();
+const mongoose = require('mongoose');
+const port = 3000;
 
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
+//use routes to use routes in app.js
+app.use(routes);
+
 // Connect to DATABASE
-const DATABASE_URL = "mongodb+srv://vaibhav:vaibhav@cluster0.4wefkqc.mongodb.net/?retryWrites=true&w=majority";
+const DATABASE_URL = "mongodb+srv://vaibhav:vaibhav@cluster0.pgziewj.mongodb.net/?retryWrites=true&w=majority";
+mongoose.connect(DATABASE_URL,{ useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection
-mongoose.connect(DATABASE_URL,{ useNewUrlParser: true, useUnifiedTopology: true },(err)=>{
-    if(err){
-        console.log("Failed to connect to db")
-    }
-    else{
-        console.log("Successfully connnected to db")
-    }
-});
+db.on('error', (err) => console.log(err))
+db.once('open', () => console.log('connected to database'))
 
 
 // Start Server
