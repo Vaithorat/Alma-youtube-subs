@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const subscriberModel = require('./models/subscriber');
+const subscriberModel = require('./models/subscribers');
 const data = require('./data');
 
 // Connect to DATABASE
