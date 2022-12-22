@@ -1,9 +1,10 @@
 const express = require("express");
+const mongoose = require("mongoose")
 const { ObjectId } = require("mongodb");
 const subscriberModel = require("./models/subscribers");
 const app = express();
-app.use(express.json());
-const router = express.Router();
+app.use(router);
+
 
 router.get("/", (req, res) => {
   res.json("Hello. This project is made by Vaibhav Thorat");
