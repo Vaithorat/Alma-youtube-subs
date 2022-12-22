@@ -27,7 +27,7 @@ app.post("/subscribers", async (req, res) => {
   //body to add details about the subscriber
   const body = req.body;
   //create a new subscriber and add it to database
-  const subscriber = await subscriberModel
+  const result = await subscriberModel
     .create(body)
     .then((result) => {
       //return the new result with status code of 200
