@@ -4,8 +4,8 @@ const subscriberModel = require("./models/subscribers");
 const app = express();
 app.use(express.json());
 
-const subscriberRoutes = require('./subscriberRoutes');
-require('./databaseConnection');
+const subscriberRoutes = require('../routes/subscriberRoutes');
+require('../routes/databaseConnection');
 
 app.use('/', subscriberRoutes);
 
