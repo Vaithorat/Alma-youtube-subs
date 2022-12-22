@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const { ObjectId } = require("mongodb");
 const subscriberModel = require("./src/models/subscribers");
 const app = express();
+const router = express.Router();
 app.use(router);
 
 
